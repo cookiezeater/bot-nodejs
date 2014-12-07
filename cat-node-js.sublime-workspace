@@ -1,0 +1,908 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"resp",
+				"response"
+			],
+			[
+				"new",
+				"newYear"
+			],
+			[
+				"парол",
+				"пароля"
+			],
+			[
+				"create_user",
+				"create_user_validation_fname_label"
+			],
+			[
+				"ftp",
+				"ftp"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app.js",
+			"settings":
+			{
+				"buffer_size": 5447,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "var request = require('request')\nvar Q = require('q')\n\nvar textCase = require('./textcase')\n\nvar phrases = [\n  {\n    pattern: /как дела/i,\n    response: function() { \n      var ph = ['Заебись','Чётенько','Охуенно','Норм'];\n      var resp = ph[Math.floor(Math.random() * ph.length)];\n    }\n  },\n  {\n    pattern: /^(кот|кот.|кс-кс-кс)(.*)$/i,\n    response: function() {\n      var ph = [\n        'Чё?',\n        'Не твой',\n        'Meooow!',\n        'Мяю, блядь',\n        'Ты зоофил чтоли?',\n        'Это я, поешь говна' \n      ];\n      var resp = ph[Math.floor(Math.random() * ph.length)];\n      return resp;\n    }\n  },  \n  {\n    pattern: /^(Кот, тест|Котяра|Котик|Кот БР|Стройся, БР!|БР, стройся!)$/i,\n    response: function() { \n      var ph = [\n        'Жив! Цел! Кот!',\n        'Сейчас я твой анал протестирую',\n        'Когда доделаем и оттестируем',\n        'Нахуй иди...',\n        'Я кот, ебал всех в рот',\n        'Я томат, вас пырнуть я буду рад ))00',\n        ''\n      ];\n      var resp = ph[Math.floor(Math.random() * ph.length)];\n      return resp;\n    }\n  },\n  {\n    pattern: /^(нет|нет.)$/i,\n    response: function() {\n      var ph = [\n        'Пидора ответ',\n        'Шипилова ответ',\n        'Маме привет',\n        'Как нет, когда да?'\n      ];\n      var resp = ph[Math.floor(Math.random() * ph.length)];\n      return resp;\n    }\n  },\n  {\n    pattern: /очко/i,\n    response: function() {\n      var ph = [\n        'Очко как у Кличко!',\n        'Очко',\n        'Горячее. Зимнее. Твоё.'\n      ];\n      var resp = ph[Math.floor(Math.random() * ph.length)];\n      return resp;\n    }  \n  },\n  {\n    pattern: /(подошел|сюда иди|подойди|к ноге)/i,\n    response: function() {\n      var ph = [\n        'Чё подошел? Нахуй пошёл',\n        'Кеды нашёл? Нахуй пошёл',\n        'Ты чё ахуел? Сам подойди',\n        'А то чё?'\n      ];\n      var resp = ph[Math.floor(Math.random() * ph.length)];\n      return resp;\n    }\n  },\n\n  {\n    pattern: /(привет|здаров|хайль|приветик|здравствуй|хай|hi|hello)/ig,\n    response: function() { \n      var ph = [\n        'Привет', \n        'Зиг Хайль!', \n        'Здарова!', \n        'Привет ты чё ахуел',\n        'Привет, братан',\n        'С пидорами не здороваюсь'\n      ];\n      var resp = ph[Math.floor(Math.random() * ph.length)];\n      return resp;\n    }\n  },\n  {\n    pattern: /(нет ты|ебало завали)/i,\n    response: function() {\n      var ph = ['Нет ты!', 'Нет, ёпта, ты', 'Ты', 'Нет ты', 'Чо ахуел'];\n      var resp = ph[Math.floor(Math.random() * ph.length)];\n      return resp;\n    }\n  },\n  {\n    pattern: /^(.*)(побью|разобью|сломаю|уебну|сосать|соси|уебу|ебну|рак)(.*)$/i,\n    response: function() {\n      var ph = [\n        'А я тебе ебало раскурочу',\n        'Рак!', \n        'А я твою мать выебу',\n        'Петух-форточник))00',\n        'Я тебя обоссу))',\n        'Один прогиб и ты погиб',\n        'Ну и мразь же ты'\n      ];\n      var resp = ph[Math.floor(Math.random() * ph.length)];\n      \n      return resp;\n    }\n  },\n  {\n    pattern: /^(.*)(ты чё|ты че|ты чо)(.*)$/i,\n    response: function() {\n      var ph = [\n        'Хуй через плечо',\n        'Хуй тебе в очко', \n        'А ты чё', \n        'Чё ты, ёпта', \n        'В тапки твои сру, вот чё...',\n        'Ничё, а чё?'\n      ];\n      var resp = ph[Math.floor(Math.random() * ph.length)];\n      return resp;\n    }\n  },\n  {\n    pattern: /(ок,ok,окей)/i,\n    response: function() {\n      var ph = [\n        'Хуйок', \n        'Соси выблядок', \n        'Вот и хорошо. Теперь я ебал твою мать',\n        'ОК'\n      ];\n      var resp = ph[Math.floor(Math.random() * ph.length)];\n      return resp;\n    }\n  },\n  {\n    pattern: /кек/i,\n    response: function() {\n      var ph = [\n        'Хуек',\n        'Кекалка ебаная', \n        'За кек качки в жопу ебут, вообще-то',\n        'За кек и лол стреляю в упор',\n        'Кек'\n      ];\n      var resp = ph[Math.floor(Math.random() * ph.length)];\n      return resp;\n    }\n  },\n  {\n    pattern: /^(.*)(иди нахуй|нахуй иди|съебни|съеби)(.*)$/i,\n    response: function() {\n      var ph = [\n        'Я твою мать ебал',\n        'Сам уебывай, пидорас', \n        'Да-да-да-да, попизди ещё, пидорок',\n        'Нет, ты',\n        'Я тебя найду'\n      ];\n      var resp = ph[Math.floor(Math.random() * ph.length)];\n      return resp;\n    }\n  },\n  {\n    pattern: /(шипилов|шип|гриваченко|зефир|зф|зоеф|zf|grivachenko|борисов|калуцкий)/i,\n    response: function() {\n      var ph = [\n        'Мне кажется, или кто-то назвал по имени очередного рака?',\n        'Ну давайте хоть сегодня не будем про пидоров',\n        'Звучат имена успешных)00',\n        'Кек',\n        'Шипилов, Борисов и Zf Гриваченко -- хуесосы',\n        'Я его рот ебал'\n      ];\n      var resp = ph[Math.floor(Math.random() * ph.length)];\n      return resp;\n    }\n  },\n  {\n    pattern: /(спокойной ночи|споки|спать|сладких снов|отбой)/i,\n    response: function() {\n      var ph = [\n        'Да-да, уёбывай спать',\n        'Чтоб ты не проснулось',\n        'Спокойной ночи, ёпта', \n        'Когда ты уснешь, я присуну твоей маме',\n        'Спи, а я пока с твоей мамой поиграю',\n        'Чому спать? Го поебемся!' \n      ];\n      var resp = ph[Math.floor(Math.random() * ph.length)];\n      return resp;\n    }\n  },\n  {\n    pattern: /(Слава БР!|Слава Украине!)/i,\n    response: function() {\n      var ph = [\n        'Героям Слава! o/',\n        'Слава Нации! o/',\n        'Кто не снами тот папайя',\n        'Кто не с нами, тот ахуел'\n      ];\n      var resp = ph[Math.floor(Math.random() * ph.length)];\n      return resp;\n    }\n  },\n  {\n    pattern: /^(.*)(хуль|чому|почему)(.*)$/,\n    response: function() {\n      var ph = [\n        'так надо!',\n        'потому',\n        'хз',\n        'ну вот так',\n        'так повелось'\n      ];\n      var resp = ph[Math.floor(Math.random() * ph.length)];\n      return resp;\n    }\n  }\n]\n\n\nmodule.exports = phrases",
+			"file": "phrases.js",
+			"file_size": 7318,
+			"file_write_time": 130621052114281823,
+			"settings":
+			{
+				"buffer_size": 5839,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "vk.js",
+			"settings":
+			{
+				"buffer_size": 5185,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 265.0,
+		"selected_items":
+		[
+			[
+				"brow",
+				"SFTP: Browse Remote…"
+			],
+			[
+				"packa",
+				"Package Control: List Packages"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"remote",
+				"SFTP: Browse Remote…"
+			],
+			[
+				"browse ser",
+				"SFTP: Browse Server…"
+			],
+			[
+				"js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"br",
+				"SFTP: Browse Server…"
+			],
+			[
+				"syntaxhtml",
+				"Set Syntax: HTML"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"server",
+				"SFTP: Browse Server…"
+			],
+			[
+				"browser",
+				"SFTP: Browse Server…"
+			],
+			[
+				"upda",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"bremo",
+				"SFTP: Browse Remote…"
+			],
+			[
+				"setup",
+				"SFTP: Setup Server…"
+			],
+			[
+				"packins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 536.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/cat/proxy.js",
+		"/C/cat/menu.js",
+		"/C/cat/textcase.js",
+		"/C/cat/npm-debug.log",
+		"/C/cat/options.json",
+		"/C/cat/auth.json",
+		"/C/cat/token.json",
+		"/C/cat/phrases.js",
+		"/C/cat/app.js",
+		"/C/users/aaron/appdata/local/temp/sublime-sftp-browse-1417426037/dev.ruvio.ru/www/vkhead.ru/2015/css/style.css",
+		"/C/users/aaron/appdata/local/temp/sublime-sftp-browse-1417425183/dev.ruvio.ru/www/vkhead.ru/2015/index.php",
+		"/C/users/aaron/appdata/local/temp/sublime-sftp-browse-1417426766/dev.ruvio.ru/www/vkhead.ru/2015/js/functions.js",
+		"/C/users/aaron/appdata/local/temp/sublime-sftp-browse-1417425126/dev.ruvio.ru/www/vkhead.ru/2015/.htaccess",
+		"/C/users/aaron/appdata/local/temp/sublime-sftp-browse-1417125226/dev.ruvio.ru/www/idev.eurodir.ru/tools/sendmail.php",
+		"/C/Users/Aaron/Desktop/test.js",
+		"/C/users/aaron/appdata/local/temp/sublime-sftp-browse-1417122043/dev.ruvio.ru/www/idev.eurodir.ru/tools/sendmail.php",
+		"/C/users/aaron/appdata/local/temp/sublime-sftp-browse-1416871186/dev.ruvio.ru/www/idev.eurodir.ru/tools/exchange.php",
+		"/C/users/aaron/appdata/local/temp/sublime-sftp-browse-1416872806/dev.ruvio.ru/www/vkhead.ru/exchange/r.php",
+		"/C/users/aaron/appdata/local/temp/sublime-sftp-browse-1416871150/dev.ruvio.ru/www/idev.eurodir.ru/tools/exchange/dynamic.php",
+		"/C/users/aaron/appdata/local/temp/sublime-sftp-browse-1416794040/dev.ruvio.ru/www/dev.ruvio.ru/application/views/noauth/main.php",
+		"/C/users/aaron/appdata/local/temp/sublime-sftp-browse-1416794010/dev.ruvio.ru/www/dev.ruvio.ru/application/controllers/main.php",
+		"/C/users/aaron/appdata/local/temp/sublime-sftp-browse-1416792741/dev.ruvio.ru/www/dev.ruvio.ru/application/language/ru/ruvio_lang.php",
+		"/C/users/aaron/appdata/local/temp/sublime-sftp-browse-1416792771/dev.ruvio.ru/www/dev.ruvio.ru/application/language/ru/auth_lang.php",
+		"/C/users/aaron/appdata/local/temp/sublime-sftp-browse-1416490403/dev.ruvio.ru/www/dev.ruvio.ru/application/controllers/auth.php",
+		"/C/users/aaron/appdata/local/temp/sublime-sftp-browse-1416490381/dev.ruvio.ru/www/dev.ruvio.ru/application/controllers/main.php",
+		"/C/Users/Aaron/AppData/Roaming/Sublime Text 3/Packages/User/sftp_servers/dev.ruvio.ru"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"listen"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5447,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2585,
+								2585
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"sublime_auto_complete": true,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1234.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "phrases.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5839,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2938,
+								2938
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"sublime_auto_complete": true,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1486.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "vk.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5185,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2222,
+								2222
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"sublime_auto_complete": true,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 982.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.sftp":
+	{
+		"height": 100.0
+	},
+	"project": "cat-node-js.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"last_automatic_layout":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		]
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+		"max_columns": 2
+	}
+}
